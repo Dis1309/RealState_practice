@@ -13,6 +13,7 @@ const personal_info = document.querySelector("#personal_info");
 const property_info = document.querySelector("#property_info");
 const back_btn = document.querySelector("#back_btn");
 const submit_btn = document.querySelector("#submit_btn");
+let tokens;
 console.log(ethers);var r =0 ; let obj={}; let arr_list1=[]; let arr_list2 =[];let arr_list3 = []; let f = [];let arrp =[];
 continue_btn.addEventListener("click", () => {
   personal_info.style.display = "none";
@@ -25,9 +26,11 @@ back_btn.addEventListener("click", () => {
 });
 
 
-const reladd = "0x2BFBF10D237e86b86E4071C7af3f0c0bED49c979";
-const conadd = "0xf08bdceBb311abd745c7319483d92b4155C4CaF7";
+
+const conadd = "0x6b8bf66290cC88e594FBF8e8cb7E75D5e26F3673";
+
 const cabi = [
+
   {
     "inputs": [
       {
@@ -928,10 +931,14 @@ const rabi =[
     "type": "function"
   }
 ];
+const reladd = "0x25AAC613049F56779064905749F18A0423447115";
+    
+  let seller;
 let provider,signer,con,realEstate;
    async function sure(){
      provider = new ethers.BrowserProvider(window.ethereum);
     signer = await provider.getSigner();
+    seller = signer;
     con = new ethers.Contract(conadd,cabi,signer);
     realEstate = new ethers.Contract(reladd, rabi, seller);
     console.log(signer);
@@ -959,7 +966,8 @@ let provider,signer,con,realEstate;
     let price = await con.pr(i);
     arrp.push(price);
     }
-    const tokens = (n) => {
+    console.log(arrp);
+    tokens = (n) => {
       return ethers.parseUnits(n.toString())
     }
   }
@@ -967,7 +975,7 @@ let provider,signer,con,realEstate;
 //using buy 
 async function hello (r) {
     let transaction = await con.declareBuyer(r,signer);
-    await signer.sendTransaction({to: conadd,value: tokens(0.03),gasLimit: 600});
+    await signer.sendTransaction({to: conadd,value: tokens(0.03),gasLimit: 200});
     let b = await con.getBalance();
     console.log(b);
     let result = await con.connect(signer).bought(r,await realEstate.totalSupply(),{value: tokens(0.01)});
@@ -987,18 +995,23 @@ async function hello (r) {
 //   let transaction = await con.cancelSale(1); 
 // })
 
+const arr_image = ["./images/img1.jpeg", "./images/img2.jpeg", "./images/img3.jpeg", "./images/img4.jpeg", "./images/img5.jpeg", "./images/img6.jpeg", "./images/img7.jpg", "./images/img8.jpeg", "./images/img9.jpeg", "./images/img10.jpeg", "./images/img11.jpeg", "./images/img12.jpeg"];
+    console.log(arr_image);
+    let a = 0;
 const container2 = document.querySelector("#container2");
 submit_btn.addEventListener("click", async (e) => {
   e.preventDefault();
-
+  container2.innerHTML = "";
+  let check = 0;
+ 
   await sure();
   const name = document.querySelector("#name").value;
   const email = document.querySelector("#email").value;
   const ph_number = document.querySelector("#ph_number").value;
   const city = document.querySelector("#city").value;
-  const min_price = document.querySelector("#min_price").value;
-  const max_price = document.querySelector("#max_price").value;
-  const room_count = document.querySelector("#bedroom_count").value;
+  const min_price = Number(document.querySelector("#min_price").value);
+  const max_price = Number(document.querySelector("#max_price").value);
+  const room_count = Number(document.querySelector("#bedroom_count").value);
   
   
   console.log(name);
@@ -1011,25 +1024,35 @@ submit_btn.addEventListener("click", async (e) => {
   console.log(arrp.length);
   console.log(arrp);
 console.log(arrp[0] == '0');
+
  for(let i=0; i<arrp.length; i++){
-  
-    const arr_image = ["./house1_drawingroom.jpg", "./house1.jpg"];
-    console.log(arr_image);
+  //start
+  if(arrp[i]<= max_price && arrp[i]>= min_price && room_count == arr_list1[i][2] && city == arr_list2[i][0]){
+    check = 1;
+    a++;
     //here we are creating a div that will show the info of a single house
   const house = document.createElement("div");
   house.classList.add("house");
   //code for initial visible part
   const visible =  document.createElement("div");
   visible.classList.add("visible");
- 
+ const image_div = document.createElement("div");
+ image_div.classList.add("image_div");
+ const image = document.createElement("img");
+ image.classList.add("image");
+ image.setAttribute("src", arr_image[a]);
+image_div.appendChild(image);
+ visible.appendChild(image_div);
   //here is the code for swiper
+  /*
   const swiper = document.createElement("div");
   swiper.classList.add("swiper");
   swiper.classList.add("mySwiper");
   const swiper_wrapper = document.createElement("div");
   swiper_wrapper.classList.add("swiper-wrapper");
-  for (let j = 0; j < arr_image.length; j++) {
-    const img = document.createElement("img");
+  for (let j = a; j < a+2; j++) {
+    console.log(arr_image[j]);
+    let img = document.createElement("img");
     img.classList.add("swiper-slide");
     img.setAttribute("src", arr_image[j]);
     swiper_wrapper.appendChild(img);
@@ -1047,7 +1070,7 @@ console.log(arrp[0] == '0');
       prevEl: ".swiper-button-prev",
     },
   });
-  visible.appendChild(swiper);
+  visible.appendChild(swiper);*/
   //visible content(heading) 
   const visible_content = document.createElement("div");
   visible_content.classList.add("visible_content");
@@ -1074,7 +1097,7 @@ console.log(arrp[0] == '0');
     const div_info_bedroom_p = document.createElement("p");
     div_info_bedroom_p.innerHTML = "bedroom count";
     const div_info_bedroom_h3 = document.createElement("h3");
-    div_info_bedroom_h3.innerHTML = arr_list1[i][0][2] + "BHK";
+    div_info_bedroom_h3.innerHTML = arr_list1[i][2] + " BHK";
     div_info_bedroom.appendChild(div_info_bedroom_p);
     div_info_bedroom.appendChild(div_info_bedroom_h3);
     div_info.appendChild(div_info_bedroom);
@@ -1146,8 +1169,13 @@ console.log(arrp[0] == '0');
         marker.setAnimation(google.maps.Animation.BOUNCE);
       }
     }
+    const address = arr_list2[i][2];
+    const address_arr = address.split(" ");
+    console.log(address_arr);
+    const address_str = address_arr.join("%20");
+    console.log(address_str);
     fetch(
-      `https://trueway-geocoding.p.rapidapi.com/Geocode?address=awho%20twin%20towers%20greater%20noida%20india&language=en`,
+      `https://trueway-geocoding.p.rapidapi.com/Geocode?address=${address_str}&language=en`,
       options
     )
       .then((response) => response.json())
@@ -1175,23 +1203,48 @@ console.log(arrp[0] == '0');
     const buy_btn = document.createElement("button");
     buy_btn.classList.add("buy_btn");
     buy_btn.innerHTML = "Buy Now";
+    buy_btn.setAttribute("data-niftbuy", i);
+    console.log(buy_btn);
+    console.log(buy_btn.dataset.niftbuy);
     div_buttons.appendChild(buy_btn);
     //cancel btn
     const cancel_btn = document.createElement("button");
     cancel_btn.classList.add("cancel_btn");
     cancel_btn.innerHTML = "Cancel Deal";
+    //setting the data property
+    cancel_btn.setAttribute("data-nift", i);
+    console.log(cancel_btn);
+    console.log(cancel_btn.dataset.nift);
     div_buttons.appendChild(cancel_btn);
 
     hidden.appendChild(div_buttons);
     house.appendChild(hidden);
   container2.appendChild(house);
-  }
- 
+//end 
+    } 
+}
+ if(check == 0){
+  alert("Sorry for delay, but currently we could not find any relevant options for you, TRY altering the price range")
+ }
  
 });
+container2.addEventListener("click", (e)=>{
+  if (e.target.className == "buy_btn") {
+    let niftbuy = e.target.dataset.niftbuy;
+    e.target.style.backgroundColor = "green";
+    console.log(niftbuy);
+    hello(Number(niftbuy));
+  }
+})
 
-
-
+container2.addEventListener("click", async (e)=>{
+  if (e.target.className == "cancel_btn") {
+    let nift = e.target.dataset.nift;
+    e.target.style.backgroundColor = "red";
+    let transaction = await con.cancelSale(nift); 
+    
+}
+})
 
 const show_more = document.querySelector(".show_more_btn");
 container2.addEventListener("click", (e) => {
@@ -1210,12 +1263,13 @@ container2.addEventListener("click", (e) => {
   console.log(e.target.parentElement.parentElement.previousSibling);
  
 
-  const show_more =
+  
+  if (e.target.className == "show_less_btn") {
+    const show_more =
     e.target.parentElement.parentElement.previousSibling.querySelector(".show_more_btn");
   console.log(
    show_more
   );
-  if (e.target.className == "show_less_btn") {
     const hidden = e.target.parentElement.parentElement;
     hidden.style.display = "none";
     show_more.style.display = "block";

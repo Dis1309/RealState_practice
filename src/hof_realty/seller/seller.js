@@ -1,8 +1,11 @@
 let con, realEstate, r, conadd, reladd, privatekey, cabi, rabi, signer, seller, tokens;
 window.addEventListener("load", async ()=>{
 /***************IMAGE UPLOAD*****************/
- reladd = "0x2BFBF10D237e86b86E4071C7af3f0c0bED49c979";
- conadd = "0xf08bdceBb311abd745c7319483d92b4155C4CaF7";
+
+ reladd = "0x25AAC613049F56779064905749F18A0423447115";
+ conadd = "0x6b8bf66290cC88e594FBF8e8cb7E75D5e26F3673";
+
+ 
  privatekey = "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
  cabi = [
   {
@@ -963,8 +966,9 @@ console.log(signer);
 //   const realEstate = new ethers.Contract(reladd, rabi, seller);
   
 // const con = new ethers.Contract(conadd, cabi, seller);
-    transaction = await con.connect(seller).list1(r,amenities,sqfoot,bedno,str,desc,tokens(list),await realEstate.totalSupply());
-    let mail = await con.meta1(r);
+// const f = await realEstate.totalSupply();
+  transaction = await con.connect(seller).list1(r,amenities,sqfoot,bedno,str,desc,tokens(list),await realEstate.totalSupply());
+  let mail = await con.meta1(r);
   console.log(mail);
    mail = await con.meta2(r);
   console.log(mail);
@@ -1069,6 +1073,25 @@ submit_btn.addEventListener("click", (e) => {
  str=url_arr.join(" ");
 console.log(str);
 button3(amenities, sqfoot, bedno, str, desc, listing_price);
+const container1 = document.querySelector("#container1");
+console.log(container1);
+container1.innerHTML = "";
+const congo_mssg = document.createElement("div");
+congo_mssg.classList.add("congo_mssg");
+const h1 = document.createElement("h1");
+h1.innerHTML = "Congratulations";
+congo_mssg.appendChild(h1);
+const p = document.createElement("p");
+p.innerHTML = "the details of your property have been successfully uploaded. We will notify you as soon as we find a suitable buyer";
+congo_mssg.appendChild(p);
+const home_btn = document.createElement("a");
+home_btn.href =  "../main_index.html";
+home_btn.innerHTML = "Back to Home";
+congo_mssg.appendChild(home_btn);
+container1.appendChild(congo_mssg); 
+
+
+
 });
 if(!window.ethereum) {
     throw new Error("No wallet installed")
