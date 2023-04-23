@@ -1,5 +1,5 @@
-
 # REALTY
+
 ## A Real Estate Platform using Blockchain and Web Development
 
 This is a real estate platform built using blockchain and web development technologies. The platform aims to eliminate middlemen brokerage by creating a decentralized system that allows for secure and transparent transactions between buyers and sellers. The platform includes a smart contract developed using Solidity, deployed on the blockchain platform, Ethereum and a web application that provides a user interface for buyers and sellers to view properties, make offers, and execute transactions.
