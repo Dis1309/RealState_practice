@@ -55,8 +55,10 @@ To get started with the real estate platform, follow these steps:
 The real estate platform requires the following dependencies:
 
 * Solidity
-* Ethereum
-* Node JS
+* Ethers
+* Cors
+* Axios
+* hardhat
 * Express JS
 
 # Acknowledgement
