@@ -1,11 +1,12 @@
 
-# REALTY : A Real Estate Platform using Blockchain and Web Development
+# REALTY
+## A Real Estate Platform using Blockchain and Web Development
 
 This is a real estate platform built using blockchain and web development technologies. The platform aims to eliminate middlemen brokerage by creating a decentralized system that allows for secure and transparent transactions between buyers and sellers. The platform includes a smart contract developed using Solidity, deployed on the blockchain platform, Ethereum and a web application that provides a user interface for buyers and sellers to view properties, make offers, and execute transactions.
-<img width="1470" alt="Screenshot 2023-04-23 at 9 25 34 PM" src="https://user-images.githubusercontent.com/120054985/233853825-9adb55a1-8921-4338-bddd-71f39fa63b82.png">
-<img width="1470" alt="4" src="https://user-images.githubusercontent.com/120054985/233853797-060ae0b3-484e-4692-9edf-e265f1795cc0.png">
-<img width="1470" alt="Screenshot 2023-04-23 at 9 26 24 PM" src="https://user-images.githubusercontent.com/120054985/233853855-a9a11313-f30f-4c29-ba1c-0b4cc85f65bf.png">
 
+
+<img width="200" alt="Screenshot 2023-04-23 at 9 25 34 PM" src="https://user-images.githubusercontent.com/120054985/233853825-9adb55a1-8921-4338-bddd-71f39fa63b82.png">    <img width="200" alt="4" src="https://user-images.githubusercontent.com/120054985/233853797-060ae0b3-484e-4692-9edf-e265f1795cc0.png">     <img width="200" alt="Screenshot 2023-04-23 at 9 26 24 PM" src="https://user-images.githubusercontent.com/120054985/233853855-a9a11313-f30f-4c29-ba1c-0b4cc85f65bf.png">
+<video autoplay loop   src="https://user-images.githubusercontent.com/120054985/233864494-c3e97606-2724-4314-a6ce-58a8bcc6fc92.mp4" />
 
 # Features
 
@@ -55,9 +56,12 @@ To get started with the real estate platform, follow these steps:
 The real estate platform requires the following dependencies:
 
 * Solidity
-* Ethereum
-* Node JS
+* Ethers
+* Cors
+* Axios
+* hardhat
 * Express JS
+
 
 # Acknowledgement
 
